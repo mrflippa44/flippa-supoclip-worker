@@ -1,0 +1,30 @@
+# Render Blueprint for Flippa AI · SupoClip Linux Worker (AGPL-3.0)
+# Deploy at $0/month on Render Free Web Service (512 MB RAM, 0.1 vCPU)
+
+services:
+  - type: web
+    name: flippa-supoclip-worker
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: SUPOCLIP_WORKER_SECRET
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: TRANSCRIBE_PROVIDER
+        value: auto
+      - key: FACE_DETECTOR
+        value: opencv
+      - key: FFMPEG_THREADS
+        value: "1"
+      - key: FFMPEG_PRESET
+        value: superfast
+      - key: FFMPEG_CRF
+        value: "24"
+      - key: LOG_LEVEL
+        value: INFO
